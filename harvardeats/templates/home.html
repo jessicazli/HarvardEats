@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+
+<!-- Header -->
+<h1 class="centered">Welcome to Harvard<span class="green">Eats</span></h1>
+
+<div class="card-deck">
+
+    <!-- Dashboard -->
+    <div class="card" style="width: 10rem;">
+
+        <h2>Budget</h2>
+        {% if balance < 0 %}
+            <p>You have overspent by {{ -balance | usd }}.</p>
+        {% else %}
+            <p>You have {{ balance | usd }} left to spend.</p>
+        {% endif %}
+        <p>You have already spent {{ spent | usd }}.</p>
+
+         <!-- Log a Meal Button -->
+         <a href="/logmeal" class="btn btn-info" role="button">Log a Meal</a>
+         <p></p>
+
+        <!-- Add Money Button -->
+        <a href="/add" class="btn btn-info" role="button">Add Money</a>
+
+        <p></p>
+
+    </div>
+
+    <!-- User Statistics -->
+    <div class="card" style="width: 10rem">
+
+        <h2>Your Stats!</h2>
+             <!-- Favorite Restaurants -->
+            {% if length == 0 %}
+                <p>You have no favorite restaurants. Go try some!</p>
+            {% endif %}
+            {% if length == 1 %}
+                <p> Your favorite restaurant is {{ faves[0].restaurant }}. </p>
+            {% endif %}
+            {% if length == 2 %}
+                <p> Your favorite restaurants are {{ faves[0].restaurant }} and {{ faves[1].restaurant }}.</p>
+            {% endif %}
+            {% if length > 2 %}
+                <p>Your top 3 restaurants are {{ faves[0].restaurant }}, {{ faves[1].restaurant }}, and {{ faves[2].restaurant }}.</p>
+            {% endif %}
+
+        <!-- Percentile -->
+        <p>You are in the {{ percent }}th percentile of all users based on your spending.</p>
+
+        <!-- Past Meals -->
+        <a href="/pastmeals" class="btn btn-info" role="button">Past Meals</a>
+    </div>
+</div>
+
+<div class="card-deck">
+
+    <!-- HarvardEats Statistics -->
+    <div class="card" style="width: 10rem">
+
+        <h2>Across Campus</h2>
+
+        {% if enough < 5 %}
+            <p>There is not enough data yet. Please try more restaurants (and tell your friends to, as well!)</p>
+
+        {% else %}
+            <!-- Pie Chart? -->
+            <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+            <script>
+                var xValues = [ "{{ datacount[0].restaurant|safe }}", "{{ datacount[1].restaurant|safe }}", "{{ datacount[2].restaurant|safe }}", "{{ datacount[3].restaurant|safe }}", "{{ datacount[4].restaurant|safe }}", "Other"];
+                var yValues = [ {{ datacount[0].no }}, {{ datacount[1].no }}, {{ datacount[2].no }}, {{ datacount[3].no }}, {{ datacount[4].no }}, {{ othercount[0].no }}];
+
+                var barColors = [
+                "#ccaaff",
+                "#ccffff",
+                "#ccffcc",
+                "#ffffcc",
+                "#ffddcc",
+                "#ffaaff"
+                ];
+
+                new Chart("myChart", {
+                type: "pie",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                    display: true,
+                    text: "Where Are Users Getting Meals?"
+                    }
+                }
+                });
+            </script>
+        {% endif %}
+
+        <!-- Schedule a Meal with a Friend -->
+        <a href="/schedule" class="btn btn-info" role="button">Schedule a Meal with a Friend</a>
+
+    </div>
+
+    <!-- Feed -->
+    <div class="card" style="width: 10rem">
+
+        <h2>Live Feed</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th scope = "col">Restaurant</th>
+                    <th scope = "col">Cost</th>
+                    <th scope = "col">Date & Time</th>
+                </tr>
+            </thead>
+            <!--Stock Transactions-->
+            <tbody>
+                {% for item in feed %}
+                <tr>
+                    <td> {{ item.restaurant }} </td>
+                    <td>{{ item.cost | usd }}</td>
+                    <td> {{ item.time }} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
