@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block main %}
+
+    <h1>Register</h1>
+    <form action="/register" method="post">
+
+        <!-- Username -->
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+
+        <!--Confirmation Password using password template-->
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="confirmation" placeholder="Confirmation" type="password">
+        </div>
+        <p>* Password requires at least one number, one capital letter, and one exclamation or question mark *</p>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+{% endblock %}

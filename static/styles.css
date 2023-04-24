@@ -1,0 +1,107 @@
+nav {
+   margin-left: 35px;
+   font-size: 12pt;
+}
+
+nav .navbar-brand {
+   font-size: 16pt;
+}
+
+/* Colors for brand */
+nav .navbar-brand .black {
+   color: #000000;
+}
+
+nav .navbar-brand .green {
+   color: #06C167;
+}
+
+.nav-link {
+   color: black !important;
+}
+
+#right {
+   margin-right: 35px;
+}
+
+body, table {
+   font-family: Courier New, monospace;
+   text-align: center;
+}
+
+p {
+ padding: 10px 70px 10px 70px;
+}
+
+.green {
+   color: #06C167;
+}
+
+h1 {
+   margin-bottom: 50px;
+}
+
+.card-deck {
+   margin-top: 50px;
+   margin-left: 100px;
+   margin-right: 100px;
+}
+
+.card {
+   padding: 40px;
+}
+
+#myChart {
+   margin-bottom: 40px;
+}
+
+/* Button set to green function */
+.btn {
+   background-color: #06C167;
+   cursor: pointer;
+   color: white;
+   text-align: center;
+   border: none;
+   width: fit-content;
+   margin: auto;
+}
+
+.btn:hover {
+   background-color: #000000;
+}
+
+#btn-space {
+   margin-top: 20px;
+}
+
+.dropdown-item:focus {
+   background-color: #06C167;
+}
+
+/* Style CSS for Table from https://www.w3schools.com/css/css_table.asp */
+table {
+   border-collapse: collapse;
+   width: 100%;
+}
+
+tr:hover {
+   background-color: #ddd;
+}
+
+tr:nth-child(even) {
+   background-color: #f2f2f2;
+}
+
+td, th {
+  border: 1px solid #97a1a8;
+  text-align: left;
+  padding: 12px;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #06C167;
+  color: white;
+}
